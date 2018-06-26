@@ -39,27 +39,27 @@ function createSphere() {
   return [newSphere, coords] //add coords because it tells where the "random" spheres to go
 }
 
-function addBobAnimationToElement(el, coord) {
+function addBobAnimationToElement(element, coord) {
   const newAnim = document.createElement('a-animation')
-  newAnim.setAttribute("attribute", "position")
+  newAnim.setAttribute("attribute", "position") //"key and value" => the attribute, what we're setting it to, is position
   newAnim.setAttribute("repeat", "indefinite")
   newAnim.setAttribute("from", [coord[0], coord[1] - 1, coord[2]].join(" "))
   newAnim.setAttribute("to", [coord[0], coord[1] + 1, coord[2]].join(" "))
   newAnim.setAttribute("easing", "ease")
   newAnim.setAttribute("direction", "alternate")
   newAnim.setAttribute("dur", "2000")
-  el.appendChild(newAnim)
-  return el
+  element.appendChild(newAnim)
+  return element
 }
 
 function createSpheres() {
   x = 4
   while (x > 0) {
-    setTimeout(() => {
-      let [el, coords] = createSphere()
-      el = addBobAnimationToElement(el, coords)
-      addEntityToScene(el)
-    }, Math.random() * 2500)
+    setTimeout(() => { //we don't want the spheres to pop up all at once
+      let [element, coords] = createSphere()
+      element = addBobAnimationToElement(element, coords)
+      addEntityToScene(element)
+    }, Math.random() * 2500) //the time for loading a sphere is random from between 0 and 2.5 seconds
     x--
   }
 }
