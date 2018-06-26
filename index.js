@@ -46,8 +46,8 @@ function addBobAnimationToElement(element, coord) {
   newAnim.setAttribute("from", [coord[0], coord[1] - 1, coord[2]].join(" "))
   newAnim.setAttribute("to", [coord[0], coord[1] + 1, coord[2]].join(" "))
   newAnim.setAttribute("easing", "ease")
-  newAnim.setAttribute("direction", "alternate")
-  newAnim.setAttribute("dur", "2000")
+  newAnim.setAttribute("direction", "alternate") //the sphere moves up and down
+  newAnim.setAttribute("dur", "2000") //2 seconds up and 2 seconds down
   element.appendChild(newAnim)
   return element
 }
