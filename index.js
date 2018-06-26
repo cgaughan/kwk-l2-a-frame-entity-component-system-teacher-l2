@@ -32,23 +32,11 @@ function addEntityToScene(entity) {
 function createSphere() {
   const newSphere = document.createElement('a-sphere')
   const color = sample(colors)
-  const coords = sample(startPositions).join(' ')
+  const coords = sample(startPositions) //DO NOT NEED .join(' ') because it groups all the spheres together as one entity
   newSphere.setAttribute("radius", Math.ceil(Math.random() * 3))
   newSphere.setAttribute("color", color)
   newSphere.setAttribute("position", coords)
-  return newSphere
-}
-
-function createSpheres() {
-  x = 4
-  while (x > 0) {
-    setTimeout(() => {
-      let [el, coords] = createSphere()
-      el = addBobAnimationToElement(el, coords)
-      addEntityToScene(el)
-    }, Math.random() * 2500)
-    x--
-  }
+  return [newSphere, coords] //add coords because it tells where the "random" spheres to go
 }
 
 function addBobAnimationToElement(el, coord) {
@@ -63,3 +51,17 @@ function addBobAnimationToElement(el, coord) {
   el.appendChild(newAnim)
   return el
 }
+
+function createSpheres() {
+  x = 4
+  while (x > 0) {
+    setTimeout(() => {
+      let [el, coords] = createSphere()
+      el = addBobAnimationToElement(el, coords)
+      addEntityToScene(el)
+    }, Math.random() * 2500)
+    x--
+  }
+}
+
+createSpheres()
